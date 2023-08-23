@@ -1,6 +1,11 @@
 
 import mongoose from "mongoose";
-
+export interface iAds {
+  adTitle : string;
+  description : string;
+  adImage : string;
+  adVideo: string;
+}
 export interface iUser {
   name?: string;
   email?: string;
