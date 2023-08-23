@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { HTTP, mainError } from "../error/mainError";
 import cloudinary from "../utils/cloudinary";
-import bcrypt from "bcrypt";
+import bcrypt from "bcrypt"
 import userModel from "../model/userModel";
 
 export const registerUser = async (
@@ -9,6 +9,7 @@ export const registerUser = async (
   res: Response,
 ): Promise<Response> => {
   try {
+  
     const { password, email, name } = req.body;
 
 
