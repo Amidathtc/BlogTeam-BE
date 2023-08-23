@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { HTTP, mainError } from "../error/mainError";
 import cloudinary from "../utils/cloudinary";
-import bcrypt from "bcrypt";
+import bcrypt from "bcrypt"
 import userModel from "../model/userModel";
 
 export const registerUser = async (
@@ -9,7 +9,12 @@ export const registerUser = async (
   res: Response,
 ): Promise<Response> => {
   try {
+<<<<<<< HEAD
     const { password, email, name, } = req.body;
+=======
+  
+    const { password, email, name } = req.body;
+>>>>>>> 454dffc7f82c9bc7f2af41c22725f0a4e1482827
 
 
     const salt = await bcrypt.genSalt(10);

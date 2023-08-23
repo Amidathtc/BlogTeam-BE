@@ -7,7 +7,7 @@ interface iUser {
   avatar?: string;
   avatarID?: string;
   friends?: string[];
-  request?:string[];
+  request:string[];
   post?: {}[];
 }
 
@@ -35,8 +35,8 @@ const userModel = new mongoose.Schema<iUser>(
       type:Array<String>,
     },
     request:{
-      type:Array<String>,
-    },
+      type:Array<String>
+        },
     post: [
       {
         type: mongoose.Types.ObjectId,
