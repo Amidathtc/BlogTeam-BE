@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import { HTTP, mainError } from "../error/mainError";
 import cloudinary from "../utils/cloudinary";
-import bcrypt from "bcrypt";
+import bcrypt from "bcrypt"
 import userModel from "../model/userModel";
 
 export const registerUser = async (
@@ -9,14 +9,15 @@ export const registerUser = async (
   res: Response,
 ): Promise<Response> => {
   try {
-    const { password, email, name } = req.body;
+    const { password, email, name, } = req.body;
+
 
 
     const salt = await bcrypt.genSalt(10);
     const hashed = await bcrypt.hash(password, salt);
 
     const { secure_url, public_id } = await cloudinary.uploader.upload(
-      req.file.path,
+      req.file?.path,
     );
 
     const user = await userModel.create({
