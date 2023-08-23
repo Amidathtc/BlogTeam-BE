@@ -18,26 +18,29 @@ const articleModel = new mongoose.Schema<iArticle>(
     imageID: {
       type: String,
     },
-    // likes: {
-    //   type: Array,
-    // },
+    likes: {
+      type: Array,
+    },
     userID: {
       type: String,
     },
-    // rate: {
-    //   type: Number,
-    // },
-    // ratings: [
-    //   {
-    //     type: mongoose.Types.ObjectId,
-    //     ref: "ratings",
-    //   },
-    // ],
-    // category: [
-    //   {
-    //     type: String,
-    //   },
-    // ],
+    rate: {
+      type: Number,
+    },
+    ratings: [
+      {
+        type: mongoose.Types.ObjectId,
+        ref: "ratings",
+      },
+    ],
+    category: [
+      {
+        type: mongoose.Types.ObjectId
+      }
+        ],
+     categoryName: {
+        type: String,
+    },
     user: {
       type: mongoose.Types.ObjectId,
       ref: "users",

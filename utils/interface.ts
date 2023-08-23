@@ -25,6 +25,7 @@ export interface iArticle {
   ratings?: [];
   likes?: [];
   category?: [];
+  categoryName?: [];
   user?: {};
 }
 

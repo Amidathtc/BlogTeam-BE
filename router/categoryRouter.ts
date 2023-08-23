@@ -4,6 +4,6 @@ import { createCategory, viewCategory } from "../controller/categoryController";
 const router = express.Router();
 
 router.route("/view-cat").get(viewCategory)
-router.route("/:articleID/cat").get(createCategory)
+router.route("/:articleID/cat").post(createCategory)
 
 export default router

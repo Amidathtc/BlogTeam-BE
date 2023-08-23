@@ -7,8 +7,8 @@ interface iUser {
   avatar?: string;
   avatarID?: string;
   friends?: string[];
-  request:string[];
-  post?: {}[];
+  request: string[];
+  articles?: {}[];
 }
 
 interface iUserData extends iUser, mongoose.Document {}
@@ -31,20 +31,22 @@ const userModel = new mongoose.Schema<iUser>(
     avatarID: {
       type: String,
     },
-    friends:{
-      type:Array<String>,
+    friends: {
+      type: Array<String>,
     },
-    request:[{
-      type:Array<String>
-        }],
-    post: [
+    request: [
+      {
+        type: Array<String>,
+      },
+    ],
+    articles: [
       {
         type: mongoose.Types.ObjectId,
-        ref: "posts",
+        ref: "articles",
       },
     ],
   },
-  { timestamps: true },
+  { timestamps: true }
 );
 
 export default mongoose.model<iUserData>("users", userModel);
