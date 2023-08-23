@@ -1,3 +1,0 @@
-interface iPost {
-    Name : string
-}

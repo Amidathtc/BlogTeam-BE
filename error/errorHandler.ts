@@ -8,7 +8,6 @@ const preparedError = (err: mainError, res: Response) => {
     status: err.status,
     success: err.success,
     stack: err.stack,
-    error: err,
   });
 };
 

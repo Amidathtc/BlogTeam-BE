@@ -1,8 +1,10 @@
 import cors from "cors";
-import express, { Application, NextFunction, Request, Response } from "express";
+import express, { Application, NextFunction, Request, Response} from "express";
 import { HTTP, mainError } from "./error/mainError";
 import { errorHandler } from "./error/errorHandler";
 import user from "./router/userRouter";
+import friend from "./router/FriendRouter";
+import request from "./router/RequestRouter";
 
 export const mainApp = (app: Application) => {
     app.use(express.json());
@@ -20,6 +22,8 @@ export const mainApp = (app: Application) => {
     } )
 
     app.use("/api/v1", user);
+    app.use("/api/v1", friend);
+    app.use("/api/v1", request);
 
     app.all("*", (req : Request, res :Response, next: NextFunction) => {
         next(
