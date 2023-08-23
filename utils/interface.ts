@@ -1,11 +1,21 @@
 
 import mongoose from "mongoose";
 export interface iAds {
-  adTitle : string;
+  title : string;
   description : string;
-  adImage : string;
-  adVideo: string;
+  ImageURL : string;
+  createdAt : Date;
+  updatedAt  :Date;
 }
+export interface iUser {
+  name?: string;
+  email?: string;
+  password?: string;
+  avatar?: string;
+  avatarID?: string;
+  articles?: {}[];
+}
+
 export interface iUser {
   name?: string;
   email?: string;

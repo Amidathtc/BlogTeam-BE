@@ -19,7 +19,10 @@ const articleModel = new mongoose.Schema<iArticle>(
       type: String,
     },
     likes: {
-      type: Array,
+      type: [{
+        type: mongoose.Types.ObjectId,
+        ref: "user",
+      }],
     },
     userID: {
       type: String,

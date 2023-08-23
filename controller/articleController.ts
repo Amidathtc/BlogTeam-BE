@@ -3,6 +3,7 @@ import userModel from "../model/userModel";
 import articleModel from "../model/articleModel";
 import mongoose from "mongoose";
 import cloudinary from "../utils/cloudinary";
+import { HTTP } from "../error/mainError";
 
 
 export const createArticle = async (req: any, res: Response) => {
@@ -115,3 +116,78 @@ export const getAllArticles = async (req: any, res: Response) => {
 //     });
 //   }
 // };
+
+export const likeUserArticle = async (
+  req: Request,
+  res: Response
+) => {
+  try {
+    const { userID, articleID } = req.params;
+    const user: any  = await userModel.findById(userID);
+
+    if (user) {
+      const likeArticle: any = await articleModel.findById(articleID);
+
+  
+      if (!likeArticle) {
+        return res.status(HTTP.BAD_REQUEST).json({
+          message : "Article not found",
+        })
+      }
+      if (likeArticle.likes?.includes(user._id)) {
+        return res.status(HTTP.CONFILT).json({
+          message: "You have liked this article already"
+        })
+      }
+       likeArticle?.likes?.push(user._id);
+      likeArticle?.save();
+
+
+
+      return res.status(HTTP.CREATED).json({
+        message: `post liked by ${user.name}`,
+      });
+    } else {
+      return res.status(HTTP.OK).json({
+        message: "you can't do this"
+      })
+    }
+  } catch (error) {
+    res.status(HTTP.BAD_REQUEST).json({
+      message: "Error Found",
+      data: error
+    });
+  }
+};
+
+
+export const unLikeUserArticle = async (
+  req: Request,
+  res: Response
+) => {
+  try {
+    const { userID, articleID } = req.params;
+    const user = await userModel.findById(userID);
+
+    if (user) {
+      const likeArticle: any = await articleModel.findById(articleID);
+
+      likeArticle?.likes?.pull(new mongoose.Types.ObjectId(user?._id));
+      likeArticle?.save();
+
+      return res.status(HTTP.CREATED).json({
+        message: `post unliked by ${user.name}`,
+        data: likeArticle,
+      });
+    } else {
+      return res.status(HTTP.OK).json({
+        message: "you can't do this"
+      })
+    }
+  } catch (error) {
+    res.status(HTTP.BAD_REQUEST).json({
+      message: "Error Found",
+      data: error
+    });
+  }
+};
