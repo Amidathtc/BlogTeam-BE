@@ -1,15 +1,5 @@
 import mongoose from "mongoose";
-
-interface iUser {
-  name?: string;
-  password?: string;
-  email?: string;
-  avatar?: string;
-  avatarID?: string;
-  post?: {}[];
-}
-
-interface iUserData extends iUser, mongoose.Document {}
+import {iUser, iUserData} from "../utils/interface"
 
 const userModel = new mongoose.Schema<iUser>(
   {
@@ -29,10 +19,10 @@ const userModel = new mongoose.Schema<iUser>(
     avatarID: {
       type: String,
     },
-    post: [
+    articles: [
       {
         type: mongoose.Types.ObjectId,
-        ref: "posts",
+        ref: "articles",
       },
     ],
   },
