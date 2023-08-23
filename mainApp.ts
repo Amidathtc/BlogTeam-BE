@@ -6,6 +6,7 @@ import user from "./router/userRouter";
 import friend from "./router/FriendRouter";
 import request from "./router/RequestRouter";
 import articles from "./router/articleRouter";
+import category from "./router/categoryRouter";
 
 
 export const mainApp = (app: Application) => {
@@ -27,6 +28,8 @@ export const mainApp = (app: Application) => {
     app.use("/api/v1", friend);
     app.use("/api/v1", request);
     app.use("/api/v1", articles);
+    app.use("/api/v1", category);
+    
 
     app.all("*", (req : Request, res :Response, next: NextFunction) => {
         next(
