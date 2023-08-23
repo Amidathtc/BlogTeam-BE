@@ -1,5 +1,17 @@
 import mongoose from "mongoose";
-import {iUser, iUserData} from "../utils/interface"
+
+interface iUser {
+  name?: string;
+  password?: string;
+  email?: string;
+  avatar?: string;
+  avatarID?: string;
+  friends?: string[];
+  request:string[];
+  post?: {}[];
+}
+
+interface iUserData extends iUser, mongoose.Document {}
 
 const userModel = new mongoose.Schema<iUser>(
   {
@@ -19,10 +31,16 @@ const userModel = new mongoose.Schema<iUser>(
     avatarID: {
       type: String,
     },
-    articles: [
+    friends:{
+      type:Array<String>,
+    },
+    request:[{
+      type:Array<String>
+        }],
+    post: [
       {
         type: mongoose.Types.ObjectId,
-        ref: "articles",
+        ref: "posts",
       },
     ],
   },
