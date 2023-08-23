@@ -34,9 +34,9 @@ const userModel = new mongoose.Schema<iUser>(
     friends:{
       type:Array<String>,
     },
-    request:{
+    request:[{
       type:Array<String>
-        },
+        }],
     post: [
       {
         type: mongoose.Types.ObjectId,

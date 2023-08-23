@@ -9,12 +9,8 @@ export const registerUser = async (
   res: Response,
 ): Promise<Response> => {
   try {
-<<<<<<< HEAD
     const { password, email, name, } = req.body;
-=======
-  
-    const { password, email, name } = req.body;
->>>>>>> 454dffc7f82c9bc7f2af41c22725f0a4e1482827
+
 
 
     const salt = await bcrypt.genSalt(10);

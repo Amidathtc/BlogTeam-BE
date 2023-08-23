@@ -3,12 +3,10 @@ import express, { Application, NextFunction, Request, Response} from "express";
 import { HTTP, mainError } from "./error/mainError";
 import { errorHandler } from "./error/errorHandler";
 import user from "./router/userRouter";
-<<<<<<< HEAD
 import friend from "./router/FriendRouter";
 import request from "./router/RequestRouter";
-=======
 import articles from "./router/articleRouter";
->>>>>>> 454dffc7f82c9bc7f2af41c22725f0a4e1482827
+
 
 export const mainApp = (app: Application) => {
     app.use(express.json());
@@ -26,12 +24,9 @@ export const mainApp = (app: Application) => {
     } )
 
     app.use("/api/v1", user);
-<<<<<<< HEAD
     app.use("/api/v1", friend);
     app.use("/api/v1", request);
-=======
     app.use("/api/v1", articles);
->>>>>>> 454dffc7f82c9bc7f2af41c22725f0a4e1482827
 
     app.all("*", (req : Request, res :Response, next: NextFunction) => {
         next(
