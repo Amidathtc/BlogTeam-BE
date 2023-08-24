@@ -33,7 +33,7 @@ export const registerUser = async (
       message: "Created user Successfully",
       data: user,
     });
-  } catch (error) {
+  } catch (error:any) {
     new mainError({
       name: "Create Error",
       message: `This Error is came as a result of you creating this User!!!`,
@@ -41,7 +41,9 @@ export const registerUser = async (
       success: false,
     });
 
-    return res.status(HTTP.BAD_REQUEST).json({ message: "Error" });
+    return res.status(HTTP.BAD_REQUEST).json({
+      message: error.messge
+    });
   }
 };
 
@@ -61,7 +63,7 @@ export const signInUser = async (
       if (checked) {
         return res.status(HTTP.CREATED).json({
           message: `welcome back ${user.name}`,
-          data: user._id,
+          data: user.id,
         });
       } else {
         new mainError({
@@ -130,12 +132,13 @@ export const getOneUser = async (
 ): Promise<Response> => {
   try {
     const { userID } = req.params;
-    const user = await userModel.findById(userID);
+    const user: any = await userModel.findById(userID);
 
     return res.status(HTTP.OK).json({
-      message: "found",
+      message: `${user.name} found`,
       data: user,
     });
+
   } catch (error) {
     new mainError({
       name: "GET Error",
@@ -143,8 +146,9 @@ export const getOneUser = async (
       status: HTTP.BAD_REQUEST,
       success: false,
     });
-
-    return res.status(HTTP.BAD_REQUEST).json({ message: "Error" });
+    return res.status(HTTP.BAD_REQUEST).json({
+      message: "Error"
+    });
   }
 };
 
@@ -159,7 +163,7 @@ export const updateOneUser = async (req: Request, res: Response):Promise <Respon
       { new: true }
     );
 
-    return res.status(HTTP.UPDATE).json({
+    return res.status(HTTP.CREATED).json({
       message:  `updated ${user.name} successfully`,
       data: user,
     });
@@ -184,7 +188,7 @@ export const deleteOneUser = async (req: Request, res: Response):Promise <Respon
 
     const user:any = await userModel.findByIdAndDelete(userID);
 
-    return res.status(HTTP.DELETE).json({
+    return res.status(HTTP.NOT_FOUND).json({
       message:  `delete ${user.name} successfully`,
     });
   } catch (error) {

@@ -1,49 +1,36 @@
-import mongoose from "mongoose";
-import { iArticle, iArticleData } from "../utils/interface"
+import mongoose from "mongoose"
+import { iAds } from "../utils/interface"
 
-const articleModel = new mongoose.Schema<iArticle>(
+const adData = new mongoose.Schema<iAds>(
   {
-    title: {
-      type: String,
+    id: {
+      type:String
     },
     content: {
       type: String,
+      required: true,
     },
     description: {
       type: String,
+      required: true,
     },
-    image: {
-      type: String,
-    },
-    imageID: {
-      type: String,
-    },
-    // likes: {
-    //   type: Array,
+    // imageUrl: {
+    //   type: String,
+    //   required: true,
     // },
-    userID: {
+    // expirationDate: {
+    //   type: Date
+  // }
+  // createdAt: Date,
+  // updatedAt: Date,
+    adsURL: {
       type: String,
     },
-    // rate: {
-    //   type: Number,
-    // },
-    // ratings: [
-    //   {
-    //     type: mongoose.Types.ObjectId,
-    //     ref: "ratings",
-    //   },
-    // ],
-    // category: [
-    //   {
-    //     type: String,
-    //   },
-    // ],
-    user: {
-      type: mongoose.Types.ObjectId,
-      ref: "users",
+    adsArr: {
+      type: Array<String>,
     },
   },
   { timestamps: true }
 );
 
-export default mongoose.model<iArticleData>("articles", articleModel);
+export default mongoose.model<iAds>("ad", adData);

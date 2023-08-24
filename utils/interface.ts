@@ -1,10 +1,16 @@
 
 import mongoose from "mongoose";
 export interface iAds {
-  adTitle : string;
-  description : string;
-  adImage : string;
-  adVideo: string;
+  id: string;
+  title: string;
+  description?: string;
+  // imageUrl?: string;
+//   expirationDate: Date;
+//   createdAt: Date;
+//   updatedAt: Date;
+adsURL?:string
+  content?: string;
+  adsArr?: string[];
 }
 export interface iUser {
   name?: string;
@@ -12,9 +18,15 @@ export interface iUser {
   password?: string;
   avatar?: string;
   avatarID?: string;
-    articles?: {}[];
-    category: []
+  articles?: {}[];
+  category: [];
+
+  userID: string;
+  rate?: number;
+  ratings?: [];
+  likes?: [];
 }
+
 export interface iArticle {
   title?: string;
   description?: string;
@@ -28,6 +40,5 @@ export interface iArticle {
   categoryName?: [];
   user?: {};
 }
-
 export interface iUserData extends iUser , mongoose.Document{}
 export interface iArticleData extends iArticle , mongoose.Document{}

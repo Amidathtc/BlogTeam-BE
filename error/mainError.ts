@@ -2,8 +2,8 @@ export enum HTTP {
   OK = 200,
   CREATED = 201,
   BAD_REQUEST = 404,
-  UPDATE = 201,
-  DELETE = 201,
+  NOT_FOUND,
+  CONFILT = 409,
 }
 
 interface iError {

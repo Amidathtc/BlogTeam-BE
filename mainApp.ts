@@ -7,6 +7,9 @@ import friend from "./router/FriendRouter";
 import request from "./router/RequestRouter";
 import articles from "./router/articleRouter";
 import category from "./router/categoryRouter";
+import rating from "./router/RatingRouter";
+import admin from "./router/adminRouter"
+import ads from "./router/adRouter"
 
 
 export const mainApp = (app: Application) => {
@@ -27,8 +30,11 @@ export const mainApp = (app: Application) => {
     app.use("/api/v1", user);
     app.use("/api/v1", friend);
     app.use("/api/v1", request);
+    app.use("/api/v1", rating);
     app.use("/api/v1", articles);
     app.use("/api/v1", category);
+    app.use("/api/v1", admin);
+    app.use("/api/v1", ads);
     
 
     app.all("*", (req : Request, res :Response, next: NextFunction) => {
