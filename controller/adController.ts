@@ -1,3 +1,4 @@
+
 // import { Request, Response } from 'express';
 // import mongoose from 'mongoose';
 // import Ad from '../model/adModel';
@@ -53,11 +54,13 @@
 //   }
 // };
 
-import { Request, Response } from "express";
-import mongoose from "mongoose";
-import Ad from "../model/adModel";
-import { HTTP } from "../error/mainError";
-import adModel from "../model/adModel";
+
+import { Request, Response } from 'express';
+import mongoose from 'mongoose';
+import Ad from '../model/adModel'; // 
+import { HTTP } from '../error/mainError'; 
+import adModel from '../model/adModel';
+
 
 // Function to clean up expired ads
 const cleanupExpiredAds = async () => {
@@ -91,11 +94,14 @@ export const createAd = async (req: any, res: Response) => {
       
     });
 
+
     // user.friends?.push(user.id)
 
     // Add the ad to the ads array
     Ad.adsArr?.push(Ad.id)
     await Ad.save();
+
+
 
     // Introduce a 2-second delay before sending the response
     setTimeout(() => {

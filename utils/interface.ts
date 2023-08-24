@@ -1,5 +1,13 @@
 
 import mongoose from "mongoose";
+
+export interface iComment {
+  comment?: string;
+  userName?: string;
+  userAvatar?: string;
+  likes?: [];
+  post?: {};
+}
 export interface iAds {
   id: string;
   title: string;
@@ -12,7 +20,7 @@ adsURL?:string
   content?: string;
   adsArr?: string[];
 }
-export interface iUser {
+export interface iAdmin {
   name?: string;
   email?: string;
   password?: string;
@@ -39,6 +47,6 @@ export interface iArticle {
   likes?: [];
   categoryName?: [];
   user?: {};
+  comments?: [];
 }
-export interface iUserData extends iUser , mongoose.Document{}
 export interface iArticleData extends iArticle , mongoose.Document{}

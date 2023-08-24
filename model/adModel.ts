@@ -29,6 +29,7 @@ const adData = new mongoose.Schema<iAds>(
     adsArr: {
       type: Array<String>,
     },
+
   },
   { timestamps: true }
 );
