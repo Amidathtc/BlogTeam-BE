@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 import mongoose from 'mongoose';
 import Ad from '../model/adModel'; // 
 import { HTTP } from '../error/mainError'; 
+import adModel from '../model/adModel';
 
 // Function to clean up expired ads
 const cleanupExpiredAds = async () => {
@@ -18,16 +19,17 @@ const cleanupExpiredAds = async () => {
 // Schedule the cleanup function to run every 24 hours (86400000 milliseconds)
 setInterval(cleanupExpiredAds, 86400000);
 
-export const createAd = async (req: Request, res: Response) => {
+export const createAd = async (req: any, res: Response) => {
   try {
     const { title, description, imageUrl } = req.body;
 
-    const newAd = new Ad({
+    const newAd :any = await adModel.create({
       title,
       description,
       imageUrl,
     });
 
+    newAd.adS?.push(newAd.id)
     await newAd.save();
 
     // Introduce a 2-second delay before sending the response

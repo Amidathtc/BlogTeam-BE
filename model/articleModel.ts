@@ -48,6 +48,12 @@ const articleModel = new mongoose.Schema<iArticle>(
       type: mongoose.Types.ObjectId,
       ref: "users",
     },
+    comments: [
+      {
+        type: mongoose.Types.ObjectId,
+        ref: "comments",
+      },
+    ],
   },
   { timestamps: true }
 );
