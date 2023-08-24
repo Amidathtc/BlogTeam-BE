@@ -12,7 +12,8 @@ export interface iUser {
   password?: string;
   avatar?: string;
   avatarID?: string;
-  articles?: {}[];
+    articles?: {}[];
+    category: []
 }
 export interface iArticle {
   title?: string;
@@ -24,7 +25,6 @@ export interface iArticle {
  rate?: number;
   ratings?: [];
   likes?: [];
-  category?: [];
   categoryName?: [];
   user?: {};
 }
