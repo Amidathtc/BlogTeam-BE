@@ -8,6 +8,9 @@ import request from "./router/RequestRouter";
 import articles from "./router/articleRouter";
 import category from "./router/categoryRouter";
 import rating from "./router/RatingRouter";
+import admin from "./router/adminRouter"
+import ads from "./router/adRouter"
+
 import comment from "./router/commentRouter";
 
 
@@ -32,6 +35,8 @@ export const mainApp = (app: Application) => {
     app.use("/api/v1", rating);
     app.use("/api/v1", articles);
     app.use("/api/v1", category);
+    app.use("/api/v1", admin);
+    app.use("/api/v1", ads);
     app.use("/api/v1", comment);
     
 

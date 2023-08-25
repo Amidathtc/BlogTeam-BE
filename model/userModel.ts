@@ -2,13 +2,14 @@ import mongoose from "mongoose";
 
 interface iUser {
   name?: string;
-  password?: string;
   email?: string;
+  password?: string;
   avatar?: string;
   avatarID?: string;
   friends?: string[];
-  request: string[];
+  request?: string[];
   articles?: {}[];
+  category?: [];
 }
 
 interface iUserData extends iUser, mongoose.Document {}
@@ -21,6 +22,7 @@ const userModel = new mongoose.Schema<iUser>(
     email: {
       type: String,
       unique: true,
+      toLowerCase: true
     },
     password: {
       type: String,
@@ -34,11 +36,13 @@ const userModel = new mongoose.Schema<iUser>(
     friends: {
       type: Array<String>,
     },
-    request: [
+    category: {
+  type: Array<String>
+},
+    request:
       {
         type: Array<String>,
       },
-    ],
     articles: [
       {
         type: mongoose.Types.ObjectId,

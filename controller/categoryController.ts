@@ -1,21 +1,35 @@
+import  mongoose  from 'mongoose';
+// import {  } from './userController';
 import express, { Request, Response} from "express";
 import categoryModel  from "../model/categoryModel";
+import { HTTP } from "../error/mainError";
+import userModel from "../model/userModel";
 
 
 export const createCategory = async (req:Request, res:Response) => {
     try {  
-    
-const {categoryName}  = req.body;
+        const { userID } = req.params;
+        
+        const { categoryName } = req.body;
+        
+        const user : any = await userModel.findById(userID);
 
-const data = await categoryModel.create({categoryName});
+        const category: any = await categoryModel.create({
+            categoryName,
+            // userID:user._id
+        });
+        
+        user.category?.push(new mongoose.Types.ObjectId(category._id))
+user?.save();
 
-    return res.status(201).json({
+
+    return res.status(HTTP.CREATED).json({
         message: "Category created",
-        data
+        data: category.id,
     })
     
 } catch (error) {
-    return res.status(404).json({
+    return res.status(HTTP.BAD_REQUEST).json({
         message: "Error creating category",
     })
 }
@@ -23,9 +37,8 @@ const data = await categoryModel.create({categoryName});
 
 
 export const viewCategory = async (req: Request, res: Response) => {
-    try {
-
-        const category: any = await categoryModel.find()
+    try { 
+            const category: any = await categoryModel.find()
 
         return res.status(200).json({
             message : "Viewing categories",

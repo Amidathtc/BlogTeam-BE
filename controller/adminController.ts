@@ -22,7 +22,7 @@ export const registerAdmin = async (
       req.file?.path,
     );
 
-    const admin = await userModel.create({
+    const admin = await adminModel.create({
       name,
       email,
       password: hashed,
@@ -30,19 +30,24 @@ export const registerAdmin = async (
       avatarID: public_id,
     });
 
+    admin.friends?.push(admin.id);
+    admin.save()
+
     return res.status(HTTP.CREATED).json({
-      message: " admin Created",
+      message: `${admin.name} created successfully`,
       data: admin,
     });
-  } catch (error) {
-    new mainError({
-      name: "Create Error",
-      message: `This Error is came as a result of you creating this User!!!`,
-      status: HTTP.BAD_REQUEST,
-      success: false,
-    });
+  } catch (error:any) {
+     new mainError({
+       name: "Create Error",
+       message: `This Error is came as a result of you creating this User!!!`,
+       status: HTTP.BAD_REQUEST,
+       success: false,
+     });
 
-    return res.status(HTTP.BAD_REQUEST).json({ message: "Error" });
+    return res.status(HTTP.BAD_REQUEST).json({
+      message: error.message
+        });
   }
 };
 
@@ -54,7 +59,7 @@ export const signInAdmin = async (
     const { password, email } = req.body;
 
 
-    const admin = await userModel.findOne({ email });
+    const admin = await adminModel.findOne({ email });
 
 
     if (admin) {
@@ -101,36 +106,68 @@ export const signInAdmin = async (
   }
 };
 
-export const getAdmins = async (
+  // export const getAdmins = async (
+  //   req: Request,
+  //   res: Response,
+  // ): Promise<Response> => {
+  //   try {
+
+  //     const admin = await adminModel.find();
+
+  //     return res.status(HTTP.OK).json({
+  //       message: "This is all the Admins",
+  //       data: admin,
+  //     });
+
+  //   } catch (error:any) {
+  //     new mainError({
+  //       name: "GET Error",
+  //       message: `This Error is came as a result of you getting all Admin!!!`,
+  //       status: HTTP.BAD_REQUEST,
+  //       success: false,
+  //     });
+
+  //     return res.status(HTTP.BAD_REQUEST).json({
+  //       message: error.message
+  //     });
+  //   }
+  // };
+
+export const getAllAdmins = async (
   req: Request,
-  res: Response,
-): Promise<Response> => {
+  res: Response
+) => {
   try {
     const admin = await adminModel.find();
 
+    // console.log(admin)
+
     return res.status(HTTP.OK).json({
-      message: "found",
+      message: "All Admin found",
       data: admin,
     });
   } catch (error) {
     new mainError({
       name: "GET Error",
-      message: `This Error is came as a result of you creating this User!!!`,
+      message: "Error finding all admins",
       status: HTTP.BAD_REQUEST,
       success: false,
     });
 
-    return res.status(HTTP.BAD_REQUEST).json({ message: "Error" });
+    return res.status(HTTP.BAD_REQUEST).json({
+      message: "Error finding all adminss",
+    });
   }
 };
 
-export const getAdmin = async (
+
+export const getOneAdmin = async (
   req: Request,
   res: Response,
 ): Promise<Response> => {
   try {
     const { adminID } = req.params;
-    const admin = await userModel.findById(adminID);
+    const admin = await adminModel.findById(adminID);
 
     return res.status(HTTP.OK).json({
       message: "found",

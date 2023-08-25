@@ -9,11 +9,16 @@ export interface iComment {
   post?: {};
 }
 export interface iAds {
-  title : string;
-  description : string;
-  ImageURL : string;
-  createdAt : Date;
-  updatedAt  :Date;
+  id: string;
+  title: string;
+  description?: string;
+  // imageUrl?: string;
+//   expirationDate: Date;
+//   createdAt: Date;
+//   updatedAt: Date;
+adsURL?:string
+  content?: string;
+  adsArr?: string[];
 }
 export interface iAdmin {
   name?: string;
@@ -22,16 +27,14 @@ export interface iAdmin {
   avatar?: string;
   avatarID?: string;
   articles?: {}[];
+  category: [];
+
+  userID: string;
+  rate?: number;
+  ratings?: [];
+  likes?: [];
 }
 
-export interface iUser {
-  name?: string;
-  email?: string;
-  password?: string;
-  avatar?: string;
-  avatarID?: string;
-  articles?: {}[];
-}
 export interface iArticle {
   title?: string;
   description?: string;
@@ -42,11 +45,8 @@ export interface iArticle {
  rate?: number;
   ratings?: [];
   likes?: [];
-  category?: [];
   categoryName?: [];
   user?: {};
   comments?: [];
 }
-
-export interface iUserData extends iUser , mongoose.Document{}
 export interface iArticleData extends iArticle , mongoose.Document{}

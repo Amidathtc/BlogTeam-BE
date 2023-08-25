@@ -36,11 +36,6 @@ const articleModel = new mongoose.Schema<iArticle>(
         ref: "ratings",
       },
     ],
-    category: [
-      {
-        type: mongoose.Types.ObjectId
-      }
-        ],
      categoryName: {
         type: String,
     },

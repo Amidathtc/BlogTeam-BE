@@ -6,7 +6,8 @@ import articleModel from "../model/articleModel"
 import {HTTP} from "../error/mainError"
 
 export const createRate = async (req:Request,res:Response) =>{
-try {
+    try {
+    
     const {userID, articleID} = req.params;
     const {rate} = req.body;
 
@@ -95,4 +96,5 @@ const Rated = await articleModel.findByIdAndUpdate(articleID,{
    });
 };
 };
+
 

@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import { iUser } from "../utils/interface";
+// import { iAdmin, iAdminData } from "../utils/interface";
 
 interface iAdmin {
   name?: string;
@@ -7,9 +7,16 @@ interface iAdmin {
   email?: string;
   avatar?: string;
   avatarID?: string;
+  adminID: string;
+  rate?: number;
+  ratings?: [];
+  likes?: [];
+  admin?: {};
   friends?: string[];
-  request: string[];
+  request?: string[];
   articles?: {}[];
+  category?: [];
+
 }
 
 interface iAdminData extends iAdmin, mongoose.Document {}
@@ -46,6 +53,32 @@ const adminModel = new mongoose.Schema<iAdmin>(
         ref: "articles",
       },
     ],
+    likes: {
+      type: [
+        {
+          type: mongoose.Types.ObjectId,
+          ref: "user",
+        },
+      ],
+    },
+    rate: {
+      type: Number,
+    },
+    ratings: [
+      {
+        type: mongoose.Types.ObjectId,
+        ref: "ratings",
+      },
+    ],
+    admin: [
+      {
+        type: mongoose.Types.ObjectId,
+        ref: "users",
+      },
+    ],
+    adminID: {
+      type:String
+    }
   },
   { timestamps: true }
 );

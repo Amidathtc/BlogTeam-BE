@@ -3,21 +3,35 @@ import { iAds } from "../utils/interface"
 
 const adData = new mongoose.Schema<iAds>(
   {
-    title : {
-      type : String,
-      required: true,
+    id: {
+      type:String
     },
-    description: {
-      type : String,
-      required: true,
-    },
-    ImageURL : {
+    content: {
       type: String,
       required: true,
     },
-   
+    description: {
+      type: String,
+      required: true,
+    },
+    // imageUrl: {
+    //   type: String,
+    //   required: true,
+    // },
+    // expirationDate: {
+    //   type: Date
+  // }
+  // createdAt: Date,
+  // updatedAt: Date,
+    adsURL: {
+      type: String,
+    },
+    adsArr: {
+      type: Array<String>,
+    },
+
   },
-  {timestamps: true}
+  { timestamps: true }
 );
 
 export default mongoose.model<iAds>("ad", adData);

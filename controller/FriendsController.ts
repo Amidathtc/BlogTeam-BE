@@ -4,10 +4,12 @@ import userModel from "../model/userModel"
 import {HTTP} from "../error/mainError"
 
 export const beFriend = async (req:Request,res:Response)=>{
-try {
+    try {
+    
     const {userID,friendID} = req.params;
 
-    const User:any = await userModel.findById(userID);
+        const User: any = await userModel.findById(userID);
+        
     const Friend:any = await userModel.findById(friendID)
 
     if (User && Friend) {
