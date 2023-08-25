@@ -12,10 +12,7 @@ export interface iAds {
   id: string;
   title: string;
   description?: string;
-  // imageUrl?: string;
-//   expirationDate: Date;
-//   createdAt: Date;
-//   updatedAt: Date;
+
 adsURL?:string
   content?: string;
   adsArr?: string[];
